@@ -1,0 +1,109 @@
+ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, sports);
+        // Set the adapter on the ListView
+        listView.setAdapter(adapter);
+        // Set an OnItemClickListener to display a message when an item is clicked
+        listView.setOnItemClickListener((parent, view, position, id) -> {
+            // Get the selected sport
+            String selectedSport = (String) parent.getItemAtPosition(position);
+
+Button spt=findViewById(R.id.button);
+        spt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentManager fragmentManager = getSupportFragmentManager();
+                fragmentManager.beginTransaction()
+                        .replace(R.id.fragmentContainerView, sports.class, null)
+                        .setReorderingAllowed(true)
+                        .addToBackStack("name") // Name can be null
+                        .commit();
+            }
+        });
+
+findViewById(R.id.changeModeButton).setOnClickListener(view -> {
+            boolean newState = !toggleButton.isChecked();
+            toggleButton.setChecked(newState);
+            showToast(newState);
+        });
+
+ArrayList<String> selectedItems = new ArrayList<>();
+        ArrayList<Integer> itemPrices = new ArrayList<>();
+        if (pi.isChecked()) {
+            selectedItems.add("Pizza");
+            itemPrices.add(10);
+      StringBuilder summary = new StringBuilder("Order Summary:\n");
+    summary.append(selectedItems.get(i)).append(": $").append(itemPrices.get(i)).append("\n");
+    private void disableCheckboxes() {
+        pi.setEnabled(false);}
+    destinationSpinner.setSelection(0);
+            selectedDateTV.setText("");
+            source = "";
+            destination = "";
+            tg.setChecked(false);
+
+spinnerVehicleType = findViewById(R.id.spinnerVehicleType);
+String vehicleType = spinnerVehicleType.getSelectedItem().toString();
+Intent intent = new Intent(MainActivity.this, ConfirmationActivity.class); //under button listener
+intent.putExtra("vehicleType", vehicleType);
+startActivity(intent)
+String vehicleType = getIntent().getStringExtra("vehicleType"); //next page
+
+String[] items = {"Pizza", "Burger", "Pasta", "Sandwich", "Noodles"};
+        int[] prices = {200, 100, 150, 80, 120};
+ private HashMap<CheckBox, Integer> foodItems = new HashMap<>();
+        for (int i = 0; i < items.length; i++) {
+            CheckBox checkBox = new CheckBox(this);
+            checkBox.setText(items[i]);
+            foodItems.put(checkBox, prices[i]);
+            foodLayout.addView(checkBox);
+        }
+//other method
+ArrayList<String> selectedItems = new ArrayList<>();
+for (CheckBox checkBox : foodItems.keySet()) {
+                if (checkBox.isChecked()) {
+                    String itemName = checkBox.getText().toString();
+                    int itemPrice = foodItems.get(checkBox);
+                    selectedItems.add(itemName);
+                    selectedPrices.add(itemPrice);
+                    totalCost += itemPrice;
+                }
+                checkBox.setEnabled(false);
+
+
+
+final Calendar c = Calendar.getInstance();
+
+                // on below line we are getting
+                // our day, month and year.
+                int year = c.get(Calendar.YEAR);
+    DatePickerDialog datePickerDialog = new DatePickerDialog(
+                        MainActivity.this,
+                        new DatePickerDialog.OnDateSetListener() {
+                            @Override
+                            public void onDateSet(DatePicker view, int year,
+                                                  int monthOfYear, int dayOfMonth) {
+                                // on below line we are setting date to our text view.
+                                selectedDateTV.setText(dayOfMonth + "-" + (monthOfYear + 1) + "-" + year);
+
+                            }
+                        },
+                        year, month, day);
+
+                datePickerDialog.getDatePicker().setMinDate(c.getTimeInMillis());
+                // at last we are calling show to
+                // display our date picker dialog.
+                datePickerDialog.show();
+Spinner destinationSpinner = findViewById(R.id.spinner3);
+
+        ArrayAdapter<String> ad = new ArrayAdapter<>(
+                this,
+                android.R.layout.simple_spinner_item,
+                places
+        );
+
+ArrayList<String> selectedItems = new ArrayList<>();
+        ad.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        sourceSpinner.setAdapter(ad);
+        destinationSpinner.setAdapter(ad);
+ToggleButton tg = findViewById(R.id.toggleButton);
+        tg.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            one_way = isChecked;
