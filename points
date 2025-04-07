@@ -104,6 +104,89 @@ ArrayList<String> selectedItems = new ArrayList<>();
         ad.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         sourceSpinner.setAdapter(ad);
         destinationSpinner.setAdapter(ad);
+source = sourceSpinner.getSelectedItem().toString();
 ToggleButton tg = findViewById(R.id.toggleButton);
         tg.setOnCheckedChangeListener((buttonView, isChecked) -> {
             one_way = isChecked;
+
+      private void openDatePicker() {
+        Calendar calendar = Calendar.getInstance();
+        DatePickerDialog datePickerDialog = new DatePickerDialog(
+                this,
+                (view, year, month, dayOfMonth) -> {
+                    String selectedDate = year + "-" + (month + 1) + "-" + dayOfMonth;
+                    tvDatePicker.setText(selectedDate);
+                },
+                calendar.get(Calendar.YEAR),
+                calendar.get(Calendar.MONTH),
+                calendar.get(Calendar.DAY_OF_MONTH)
+        );
+        datePickerDialog.getDatePicker().setMinDate(calendar.getTimeInMillis());
+        datePickerDialog.show();
+    }
+
+    private void openTimePicker() {
+        Calendar calendar = Calendar.getInstance();
+        TimePickerDialog timePickerDialog = new TimePickerDialog(this, (view, hourOfDay, minute) -> {
+                    selectedHour = hourOfDay;
+                    selectedMinute = minute;
+                    String selectedTime = String.format("%02d:%02d", hourOfDay, minute);
+                    tvTimePicker.setText(selectedTime);
+                },
+                calendar.get(Calendar.HOUR_OF_DAY),
+                calendar.get(Calendar.MINUTE),
+                true
+        );
+        timePickerDialog.show();
+    }
+if (item.getItemId() == R.id.action_contact) {
+            Intent intent = new Intent(this, ContactUsActivity.class);
+            startActivity(intent);
+        } else if (item.getItemId() == R.id.action_about) {
+            Intent intent = new Intent(this, AboutUsActivity.class);
+            startActivity(intent);
+        } else if (item.getItemId() == R.id.action_home) {
+            if (!this.getClass().getSimpleName().equals("MainActivity")) {
+                Intent intent = new Intent(this, MainActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                startActivity(intent);
+                finish();
+            }
+public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the app bar.
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menuex, menu);
+
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle menu item clicks
+        if (item.getItemId() == R.id.action_contact) {
+            Intent intent = new Intent(this, ContactUsActivity.class);
+            startActivity(intent);
+        } else if (item.getItemId() == R.id.action_about) {
+            Intent intent = new Intent(this, AboutUsActivity.class);
+            startActivity(intent);
+
+ if (!name.isEmpty() && !date.isEmpty()) {
+            dbHelper.insertTask(name, date, level);
+            taskList.add(name + " - " + date + " - " + level);
+            adapter.notifyDataSetChanged();
+            taskName.setText("");
+            dueDate.setText("");
+            Toast.makeText(this, "Task Added", Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(this, "Please fill all fields", Toast.LENGTH_SHORT).show();
+        }
+dbHelper = new DBHelper(this);
+
+taskListView.setOnItemLongClickListener((parent, view, position, id) -> {
+            String task = taskList.get(position);
+            dbHelper.deleteTask(task);
+            taskList.remove(position);
+            adapter.notifyDataSetChanged();
+            Toast.makeText(MainActivity.this, "Task Deleted", Toast.LENGTH_SHORT).show();
+            return true;
+        });
